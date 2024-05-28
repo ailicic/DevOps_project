@@ -40,6 +40,7 @@ resource "azurerm_virtual_machine" "test" {
 
     vm_size = "Standard_DS1_v2" # Add the missing "vm_size" attribute
 
+
     tags = {
         environment = "dev"
     }
