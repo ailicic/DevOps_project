@@ -1,70 +1,70 @@
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: nginx-service
-# spec:
-#   type: LoadBalancer  # Exposes the service outside of the cluster
-#   ports:
-#     - port: 80  # The port that this service should serve on.
-#       targetPort: 80  # The port on the container that the service should direct traffic to.
-#   selector:
-#     app: nginx  # Selects the pods with label app=nginx
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  type: LoadBalancer  # Exposes the service outside of the cluster
+  ports:
+    - port: 80  # The port that this service should serve on.
+      targetPort: 80  # The port on the container that the service should direct traffic to.
+  selector:
+    app: nginx  # Selects the pods with label app=nginx
 
-# ---
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: nginx-deployment
-#   labels:
-#     app: nginx
-# spec:
-#   replicas: 1  # Specifies the number of instances you want running
-#   selector:
-#     matchLabels:
-#       app: nginx
-#   template:
-#     metadata:
-#       labels:
-#         app: nginx
-#     spec:
-#       containers:
-#       - name: nginx
-#         image: nginx:latest  # Using the latest Nginx image from Docker Hub
-#         ports:
-#         - containerPort: 80  # Nginx listens on port 80 by default
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 1  # Specifies the number of instances you want running
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest  # Using the latest Nginx image from Docker Hub
+        ports:
+        - containerPort: 80  # Nginx listens on port 80 by default
 
-# ---
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: redis-deployment
-#   labels:
-#     app: redis
-# spec:
-#   replicas: 3  # Specifies the number of Redis instances
-#   selector:
-#     matchLabels:
-#       app: redis
-#   template:
-#     metadata:
-#       labels:
-#         app: redis
-#     spec:
-#       containers:
-#       - name: redis
-#         image: redis:latest  # Using the latest Redis image from Docker Hub
-#         ports:
-#         - containerPort: 6379  # Redis default port
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-deployment
+  labels:
+    app: redis
+spec:
+  replicas: 3  # Specifies the number of Redis instances
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:latest  # Using the latest Redis image from Docker Hub
+        ports:
+        - containerPort: 6379  # Redis default port
 
-# ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: redis-service
-# spec:
-#   type: ClusterIP  # Default, only accessible within the cluster
-#   ports:
-#     - port: 6379
-#       targetPort: 6379
-#   selector:
-#     app: redis  # Selects the pods with label app=redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-service
+spec:
+  type: ClusterIP  # Default, only accessible within the cluster
+  ports:
+    - port: 6379
+      targetPort: 6379
+  selector:
+    app: redis  # Selects the pods with label app=redis
