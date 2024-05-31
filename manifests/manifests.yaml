@@ -18,7 +18,7 @@ metadata:
   labels:
     app: nginx
 spec:
-  replicas: 5  # Specifies the number of instances you want running
+  replicas: 1  # Specifies the number of instances you want running
   selector:
     matchLabels:
       app: nginx
