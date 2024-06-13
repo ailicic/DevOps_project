@@ -71,7 +71,8 @@ jobs:
   #     - name: "Run Azure CLI command"
   #       run: az account show
   terraform_validate:
-    runs-on: ubuntu-latest
+    #runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
         with:
